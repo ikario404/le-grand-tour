@@ -1,7 +1,4 @@
 flask
 flask_bootstrap
-chartkick
-json
-csv
-pprint
+flask_analytics
 pandas

@@ -3,7 +3,6 @@ from flask_bootstrap import Bootstrap
 from flask_analytics import Analytics
 import os
 import csv
-import pprint as pp
 import pandas as pd
 
 def create_app(configfile=None):
@@ -22,7 +21,6 @@ def page_not_found(e):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == "POST":
-      print(request.form)
       try:
           year_selected = request.form['year']
       except:
@@ -81,6 +79,6 @@ def get_year(year):
 
         return render_template('years.html', years=json_selected, palmares=victoire_etendue)
 
-if __name__ == '__main__':    
-    #app.jinja_env.cache = {}
-    app.run(host='0.0.0.0', debug=True, port=8080)
+# if __name__ == '__main__':    
+#     #app.jinja_env.cache = {}
+#     app.run(host='0.0.0.0', debug=True, port=8080)
