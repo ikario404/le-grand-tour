@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Page Not Found{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon-bicycle.ico') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='bootstrap-theme-paper.min.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/2.3.1/css/flag-icon.min.css">
+{% endblock %}
+
+{% block body %}
+    {% block content %}
+        
+        {% block navbar %}
+        {{ super() }}
+        {% endblock %}
+
+        <div class="container" style="margin-top: 60px;">
+            <div class="row">
+                <h1>Page inéxistante</h1>
+
+                {% if year %}
+                    <h2>{{ year }}</h2>
+                    <p> {{ word }}</p>
+                    <p>Essayer avec une autre année</p>
+                {% else %}
+                    <h2>404 is the rule</h2>
+                    <p>Probablement une mauvaise Url...</p>
+                {% endif %}
+            </div>
+        </div>
+    {# {% include "footer.html" %} #}
+
+    {% endblock %}
+{% endblock %}

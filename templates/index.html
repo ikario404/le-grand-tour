@@ -1,0 +1,300 @@
+{% extends "base.html" %}
+
+{% block styles %}
+  {{ super() }}
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='cycle.css') }}">
+{% endblock %}
+
+{% block content %}
+<div id="main-content" class="container">
+
+  <br>
+  
+  <div class="row">
+    <div class="col-xs-12 col-md-offset-3 col-md-6 ">
+      <h1 class="text-center">Testez vos connaissances du Tour</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-offset-4 col-md-4">
+      <form method="POST" action="/">
+        <div class="form-group">
+          {# <label for="sel1">Choissisez une année :</label> #}
+          <select class="form-control" id="sel1" name="year">
+            {% for year in years %}
+              <option>{{ year }}</option>
+            {% endfor %}
+          </select> 
+        </div>
+        <button type="submit" class="btn btn-default center-block">Choisir une année</button>
+      </form>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-offset-2 col-md-8 ">
+      <h2 class="text-center">Le saviez-vous ?</h2>
+        <ul>
+          <li><p>Le tour de France est <strong>née en 1903</strong></p></li>
+          <li><p>Le tour de France n'a pas été disputé durant la <strong>1ère guerre mondiale et seconde guerre mondiale</strong></p></li>
+          <li><p>8 vainqueurs se sont vus leur titre désatribué à posteri (principalement pour <strong>triche et dopage</strong>) </p></li>
+        </ul>
+      
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-offset-2 col-md-8">      
+      <h3>Au total, ce sont 102 éditions qui se sont succédés dont 12 nationalités différentes ayant remportées au moins une fois la course</h3>
+      <p>
+        {% for n in data %}
+          <a href="/{{ n['year'] }}" title="{{ n['Vainqueur'] }}"> 
+            <span class="flag-icon flag-icon-{{ n['nat'] }}"></span> 
+          </a>
+        {% endfor %}
+      </p>
+    </div>
+  </div>
+
+      <hr>
+  <div class="row">
+    <div class="col-xs-12 col-md-offset-2 col-md-4"> 
+      <h4> Top 3 de pays vainqueurs :</h4>
+      <br>
+      <ul>
+        <li><p><strong>{{ nation['Nation'].iloc[0] | safe }}</strong> :
+          {{ nation['Victoires (vainqueurs)'].iloc[0] | safe }} fois</p></li>
+        <li><p><strong>{{ nation['Nation'].iloc[1] | safe }}</strong> :
+          {{ nation['Victoires (vainqueurs)'].iloc[1] | safe }} fois</p></li>
+        <li><p><strong>{{ nation['Nation'].iloc[2] | safe }}</strong> :
+          {{ nation['Victoires (vainqueurs)'].iloc[2] | safe }} fois</p></li>
+      </ul>    
+    </div>
+
+    <div class="col-xs-12 col-md-4"> 
+      <h4> Top 3 de équipes vainqueurs :</h4>
+      <br>
+      <ul>
+        <li><p><strong>{{ equipe['Equipe'].iloc[0] | safe }}</strong> :
+          {{ equipe['Victoires'].iloc[0] | safe }} fois</p></li>
+        <li><p><strong>{{ equipe['Equipe'].iloc[1] | safe }}</strong> :
+          {{ equipe['Victoires'].iloc[1] | safe }} fois</p></li>
+        <li><p><strong>{{ equipe['Equipe'].iloc[2] | safe }}</strong> :
+          {{ equipe['Victoires'].iloc[2] | safe }} fois</p></li>
+      </ul> 
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-offset-2 col-md-8">      
+      <h3 >Quelques statistiques</h3>
+    
+      <h4>&Eacute;volution de la vitesse moyenne</h4>
+      <canvas id="speed_chart" width="400" height="400"></canvas>
+      
+      <hr>
+
+      <h4>&Eacute;volution distance parcourus</h4>
+      <canvas id="distance_chart" width="400" height="400"></canvas>
+      
+      <hr>
+
+      <h4>&Eacute;volution du nombres d'étapes</h4>
+      <canvas id="step_chart" width="400" height="400"></canvas>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="bike-container">
+      <div class="cycle-outer">
+        <div class="cycle-wrapper">
+          <div class="cycle-body">
+            <div class="seat">
+              <span></span>
+            </div>
+            <div class="front-wheel-frame"></div>
+            <div class="top-frame"></div>
+            <div class="front-frame">
+              <div class="bottle-holder">
+                <span></span>
+              </div>
+            </div>
+            <div class="center-frame"></div>
+            <div class="back-frame"></div>
+            <div class="bottom-frame"></div>
+            <div class="handlebar-front"></div>
+            <div class="handlebar-curve"></div>
+          </div>
+          <div class="cycle-wheel cycle-wheel-back">
+            <div class="cycle-wheel-outer">
+              <div class="cycle-wheel-inner">
+                <div class="cycle-wheel-inner-padding">
+                  <ul class="spoke-container">
+                    <li class="spoke"></li>
+                    <li class="spoke"></li>
+                  </ul>
+                  <div class="inner-disc"></div>
+                  <div class="inner-disc-2"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cycle-wheel cycle-wheel-front">
+            <div class="cycle-wheel-outer">
+              <div class="cycle-wheel-inner">
+                <div class="cycle-wheel-inner-padding">
+                  <ul class="spoke-container">
+                    <li class="spoke"></li>
+                    <li class="spoke"></li>
+                  </ul>
+                  <div class="inner-disc"></div>
+                  <div class="inner-disc-2"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="chain-up"></div>
+          <div class="chain-bottom"></div>
+          <div class="chain-rotation">
+            <div class="outer-axle"></div>
+            <div class="chain-disc-outer">
+              <div class="chain-disc-inner"></div>
+            </div>
+            
+          </div>
+          <div class="chain-rods">
+            <div class="pedal-rod"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row last-block">
+
+    <hr>
+
+    <div class="col-xs-12 col-md-offset-4 col-md-4 text-center">
+      <h2>Votre pronostic 2016 ?</h2>
+      <p> Faite nous connaitre vos prévisions 2016 !</p>
+      <input type="text" class="form-control">
+      <br>
+      <button type="submit" class="btn btn-default center-block ">Envoyer</button>
+
+    </div>
+  </div>
+</div>
+
+{% include "footer.html" %}
+{% endblock %}
+
+{% block scripts %}
+    {{super()}}
+    <script>
+      {% if years %}
+        var years_test = {{ years | safe}};
+      {% endif %}
+
+      {% if data %}
+        var dataset = {{ data | safe }};
+        
+        var data_speed = [];
+        var data_distance = [];
+        var data_steps = [];
+        for (i = 0; i <dataset.length; i++) {
+          var average_speed = dataset[i]["Vitesse moyenne"];    
+          if (Number.isInteger(average_speed)) {
+            data_speed.push(average_speed)
+          } else {
+            //average_speed = parseFloat(average_speed.replace(',','.').replace(' ',''));
+            average_speed = parseFloat(average_speed.replace(',','.').replace(' ',''));
+            data_speed.push(average_speed)
+          }
+
+          var max_distance = dataset[i]["Distance (en km)"];
+          data_distance.push(max_distance);
+
+          var steps = dataset[i]["Étapes"];
+          data_steps.push(steps);
+        }
+      {% endif %}
+
+      var ctx = document.getElementById("speed_chart").getContext("2d");
+      ctx.canvas.height = 250;
+      var myChart = new Chart(ctx, {
+          type: 'line',
+          data: {
+              labels : years_test,
+              datasets: [{
+                  label: '# Vitesse moyenne (en km/h)',
+                  data: data_speed
+              }]
+          },
+          options: {
+              scales: {
+                  yAxes: [{
+                      ticks: {
+                          beginAtZero:true
+                      }
+                  }]
+              }
+          }
+      });
+
+      var ctx = document.getElementById("distance_chart").getContext("2d");
+      ctx.canvas.height = 250;
+      var myBarChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+              labels : years_test,
+              datasets: [{
+                  label: '# Distance parcourus (en km)',
+                  data: data_distance
+              }]
+          },
+          options: {
+              scales: {
+                  yAxes: [{
+                      ticks: {
+                          beginAtZero:true
+                      }
+                  }]
+              }
+          }
+      });
+
+      var ctx = document.getElementById("step_chart").getContext("2d");
+      ctx.canvas.height = 250;
+      var myBarChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+              labels : years_test,
+              datasets: [{
+                  label: '# Nombre d\'étapes',
+                  data: data_steps
+              }]
+          },
+          options: {
+              scales: {
+                  yAxes: [{
+                      ticks: {
+                          beginAtZero:true
+                      }
+                  }]
+              }
+          }
+      });
+
+    </script>
+{% endblock %}
+

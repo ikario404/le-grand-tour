@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% block title %}Pause Vélo - {{years['Année / Édition']}}{% endblock %}
+
+{% block styles %}
+  {{ super() }}
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/2.3.1/css/flag-icon.min.css">
+{% endblock %}
+
+{% block content %}
+  <div id="main-content" class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-offset-2 col-md-8">
+        <h1>Verificateur de tour de France :</h1>
+        <h2>Retrouver chaque vainqueur du tour de France</h2>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-xs-12 col-md-offset-1 col-md-5">
+        {% if years['Vainqueur']  %}
+          <h3>Vainqueur</h3>
+          {% if 'Lance Armstrong' in years['Vainqueur'] %}
+            <h4><a href="https://fr.wikipedia.org/wiki/{{ years['Vainqueur'].replace(' ','_') }}">{{ years['Vainqueur'] }}</h4></a>
+            <i>Désattribué en 2012</i>
+            <sub><a href="http://www.lequipe.fr/Cyclisme-sur-route/Actualites/Sept-epreuves-sans-vainqueur/322403">[voir]</a></sub>
+          {% else %}
+            <h4><a href="https://fr.wikipedia.org/wiki/{{ years['Vainqueur'].replace(' ','_') }}">{{ years['Vainqueur'] }} <span class="flag-icon flag-icon-{{years['nat']}}"></span> </a></h4>
+          {% endif %}              
+        {% endif %}
+
+        {% if years['Grand Prix de la montagne']  %}
+          <h3>Grand Prix de la montagne</h3>
+          <h5><a href="https://fr.wikipedia.org/wiki/{{ years['Grand Prix de la montagne'] }}">
+            {{ years['Grand Prix de la montagne'] }}</a></h5>
+        {% endif %}
+
+        {% if years['Par points']  %}
+          <h3>Par points</h3>
+          <h5><a href="https://fr.wikipedia.org/wiki/{{ years['Par points'] }}">
+            {{ years['Par points'] }}</a></h5>
+        {% endif %}
+
+        <hr>
+
+        {% if years['Année / Édition']  %}
+          <h4>Année / Édition</h4>
+          <p>{{ years['Année / Édition'] }}</p>
+        {% endif %}
+
+        {% if years['Distance (en km)']  %}
+          <h4>Distance total</h4>
+          <p>{{ years['Distance (en km)'] }} km</p>
+        {% endif %}
+
+        {% if years['Meilleur jeune']  %}
+          <h4>Meilleur jeune</h4>
+          <p>{{ years['Meilleur jeune'] }}</p>
+        {% endif %}
+
+        {% if years['Équipe du vainqueur']  %}
+          <h4>Équipe du vainqueur</h4>
+          <p>{{ years['Équipe du vainqueur'] }}</p>
+        {% endif %}
+
+        {% if years['Vitesse moyenne']  %}
+          <h4>Vitesse moyenne</h4>
+          <p>{{ years['Vitesse moyenne'] }} km/h</p>
+        {% endif %}
+      </div>
+
+      <div class="col-xs-12 col-md-6">
+        {% if not palmares.empty %}
+          <h3>Palmares total du vainqueur</h3>
+          <div class="table-responsive">
+            {{ palmares.to_html(classes="table table-hover", index=False) | safe}}    
+          </div>
+        {% endif %}
+        
+        
+
+        <h3>Graphe</h3>
+        <canvas id="stats_chart" width="400" height="400"></canvas>
+      </div>
+    </div>
+  </div>
+
+  {% include "footer.html" %}
+
+{% endblock %}
+
+{% block scripts %}
+    {{super()}}
+    <script>
+
+
+      {% if years %}
+        var dataset = {{ years | safe }};
+      {% endif %}
+
+      var data = {
+          datasets: [{
+              data: [
+                  {{ years['Distance (en km)'] }},
+                  {{ years['Vitesse moyenne'].replace(',','.') }},
+                  // {{ years['year'] }},
+                  {{ palmares | length }}
+              ],
+              backgroundColor: [
+                  "#FF6384",
+                  "#4BC0C0",
+                  "#FFCE56"
+              ],
+              label: 'My dataset' // for legend
+          }],
+          labels: [
+              "Distance (en km)",
+              "Vitesse moyenne",
+              // "Année",
+              "nombre de victoires"
+          ]
+      };
+
+      console.log(dataset);
+      var ctx = document.getElementById("stats_chart").getContext("2d");
+      ctx.canvas.height = 300;
+      var statsChart = new Chart(ctx, {
+          labels : Object.keys(dataset),
+          data: data,
+          type: 'polarArea'/*,
+          options: options*/
+      });
+    </script>
+{% endblock %}
+
+

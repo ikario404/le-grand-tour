@@ -1,0 +1,64 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}Pause Vélo{% endblock %}
+{% block styles %}
+    {{ super() }}
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon-bicycle.ico') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='bootstrap-theme-paper.min.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/2.3.1/css/flag-icon.min.css">
+{% endblock %}
+
+
+{% block navbar %}
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-header">
+    <a class="navbar-brand" href="{{ url_for("index") }}">
+      <i class="fa fa-bicycle" aria-hidden="true"></i> Le grand Tour</a>
+    <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </a>
+  </div>
+  <div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+      {% if request.path != '/' %}
+      <li><a href="https://fr.wikipedia.org/wiki/Tour_de_France_{{ request.path | replace('/', '') }}">{{ request.path | replace('/', '') }}</a></li>
+      {% endif %}
+    </ul>
+
+    <form method="POST" class="navbar-form navbar-right" role="search" action="/">
+      <div class="input-group">
+        <input  type="number" class="form-control" placeholder="1903" name="year" min="1903" max="2015" class="form-control" id="exampleInputEmail1" placeholder="Année">
+        <div class="input-group-btn">
+          <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+        </div>
+      </div>
+    </form>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="https://fr.wikipedia.org/wiki/Tour_de_France"><i class="fa fa-wikipedia-w" aria-hidden="true"></i></a></li>
+    </ul>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+    <h1>Pause Vélo</h1>
+{% endblock %}
+
+
+{# {% include "footer.html" %} #}
+
+{% block scripts %}
+    {{super()}}
+    {# <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.1.0/d3.js"></script> #}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="ck/static/chartkick.js"></script>
+
+    <script src="{{url_for('static', filename='script.js')}}"></script>
+{% endblock %}
