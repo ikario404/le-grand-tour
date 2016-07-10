@@ -6,10 +6,6 @@ import csv
 import pprint as pp
 import pandas as pd
 
-DEBUG = True
-FLATPAGES_AUTO_RELOAD = DEBUG
-FLATPAGES_EXTENSION = '.md'
-
 def create_app(configfile=None):
     app = Flask(__name__)
     app.config.from_object(__name__)
@@ -18,7 +14,6 @@ def create_app(configfile=None):
     return app
 
 app = create_app()
-
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -84,10 +79,7 @@ def get_year(year):
         victoire_etendue = palma.loc[(palma['Vainqueur'] == vainqueur) | (palma['Deuxième'] == vainqueur) | (palma['Troisième'] == vainqueur)]
         victoire_etendue = victoire_etendue.drop(['Nationalité first', 'Nationalité second', 'Nationalité third'], 1)
 
-
         return render_template('years.html', years=json_selected, palmares=victoire_etendue)
-
-
 
 if __name__ == '__main__':    
     #app.jinja_env.cache = {}
