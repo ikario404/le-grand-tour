@@ -103,7 +103,7 @@
           datasets: [
             {
                 label: 'nombre de fois ',
-                backgroundColor: "rgba(136,185,202,0.6)",
+                backgroundColor: "rgba(136,185,202,0.7)",
                 data: [
                     {{ stats[0] }},
                     {{ stats[1] }},
@@ -112,7 +112,10 @@
                     {{ stats[4] }},
                     {{ stats[5] }},
                     {{ stats[6] }}
-                ]
+                ],
+                pointBorderWidth: 9,
+                pointBackgroundColor: "rgba(136,185,202,0.9)",
+                pointBorderColor: "rgba(136,185,202,0.9)"
             }
           ],
           labels: [
