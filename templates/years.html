@@ -102,14 +102,16 @@
       var data_victory = {
           datasets: [
             {
-                label: 'My dataset',
-                backgroundColor: "rgba(179,181,198,0.2)",
+                label: 'nombre de fois ',
+                backgroundColor: "rgba(136,185,202,0.6)",
                 data: [
-                    {{ stats[3] }},
                     {{ stats[0] }},
                     {{ stats[1] }},
-                    {{ stats[2] }}
-                    
+                    {{ stats[2] }},
+                    {{ stats[3] }},
+                    {{ stats[4] }},
+                    {{ stats[5] }},
+                    {{ stats[6] }}
                 ]
             }
           ],
@@ -117,7 +119,10 @@
               "nombre de victoire totale",
               "nombre de fois premier",
               "nombre de fois second",
-              "nombre de fois troisième"
+              "nombre de fois troisième",
+              "meilleur grimpeur",
+              "meilleur sprinter",
+              "meilleur jeune"
               
             ]
         };
@@ -131,7 +136,8 @@
           options: {
               responsive: true,
               legend: {
-                  display: false
+                  display: false,
+                  
               },
               tooltips: {
                   mode: 'single',
@@ -146,7 +152,9 @@
               scale: {
                   ticks: {
                       beginAtZero: true,
-                      display: false
+                      stepSize: 1,
+                      fontSize:14,
+                      display: true
                   }
               },
               maintainAspectRatio: true,

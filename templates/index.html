@@ -112,10 +112,10 @@
   </div>
 
 
-<h3>Pour aller plus loin</h3>
+<!-- <h3>Pour aller plus loin</h3>
 http://www.ina.fr/video/MAN8995775140/le-tour-en-chiffres-e01-les-abandons-video.html
 
-Youtube docu sport plus dopé
+Youtube docu sport plus dopé -->
 
   <hr>
 
@@ -243,7 +243,8 @@ Youtube docu sport plus dopé
               labels : years_test,
               datasets: [{
                   label: '# Vitesse moyenne (en km/h)',
-                  data: data_speed
+                  data: data_speed,
+                  backgroundColor: "rgba(94, 153, 155,0.6)"
               }]
           },
           options: {
@@ -253,6 +254,9 @@ Youtube docu sport plus dopé
                           beginAtZero:true
                       }
                   }]
+              },
+              legend: {
+                  display: false   
               }
           }
       });
@@ -265,7 +269,8 @@ Youtube docu sport plus dopé
               labels : years_test,
               datasets: [{
                   label: '# Distance parcourus (en km)',
-                  data: data_distance
+                  data: data_distance,
+                  backgroundColor: "rgba(94, 153, 155,0.6)"
               }]
           },
           options: {
@@ -275,6 +280,9 @@ Youtube docu sport plus dopé
                           beginAtZero:true
                       }
                   }]
+              },
+              legend: {
+                  display: false   
               }
           }
       });
@@ -287,7 +295,8 @@ Youtube docu sport plus dopé
               labels : years_test,
               datasets: [{
                   label: '# Nombre d\'étapes',
-                  data: data_steps
+                  data: data_steps,
+                  backgroundColor: "rgba(94, 153, 155,0.6)"
               }]
           },
           options: {
@@ -297,6 +306,9 @@ Youtube docu sport plus dopé
                           beginAtZero:true
                       }
                   }]
+              },
+              legend: {
+                  display: false   
               }
           }
       });

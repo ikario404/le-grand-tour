@@ -68,12 +68,22 @@ def get_year(year):
           if row['year'] == year:
             json_selected = row
             vainqueur = json_selected['Vainqueur']
-            
+
         stats_selected = []
+        stats_grimpeur = []
+        stats_sprinter = []
+        stats_jeune = []
         for row in json_data:
           if row['Vainqueur'] == vainqueur:
             stats_selected.append(row)
+          if row['Grand Prix de la montagne'] == vainqueur:
+            stats_grimpeur.append(row)
+          if row['Par points'] == vainqueur:
+            stats_sprinter.append(row)
+          if row['Meilleur jeune'] == vainqueur:
+            stats_jeune.append(row)
 
+        #Get other win data
         csv_url = os.path.join(SITE_ROOT, "data", "palmares.csv")
         palma = pd.read_csv(csv_url, sep=",")
         palma_same_year = palma.loc[palma['Année'] == year]
@@ -87,22 +97,21 @@ def get_year(year):
             average_speed_by_step.append(year['Vitesse moyenne'])
             average_distance_by_step.append(year['Distance (en km)'])
 
-        # print(victoire_etendue.groupby('Vainqueur').count())
+        #Coutning things
+        count_grimpeur = 0
+        for year in stats_grimpeur:
+          count_grimpeur += 1
+
+        count_sprinter = 0
+        for year in stats_sprinter:
+          count_sprinter += 1
+
         first_count = len(victoire_etendue.loc[victoire_etendue['Vainqueur'] == vainqueur])
         second_count = len(victoire_etendue.loc[victoire_etendue['Deuxième'] == vainqueur])
         third_count = len(victoire_etendue.loc[victoire_etendue['Troisième'] == vainqueur])
         total_count = len(victoire_etendue)
-
-        victory_count = [first_count, second_count, third_count, total_count]
-        
-        print(victory_count)
-        # print(average_speed_by_step)
-        # print(average_distance_by_step)
-
-        # for i, x in victoire_etendue.iterrows():
-        #     if x['Vainqueur'] == vainqueur:
-        #         print(i, x['Vainqueur'])
-
+        victory_count = [total_count, first_count, second_count, third_count, count_grimpeur, count_sprinter, stats_jeune]
+      
         return render_template('years.html', years=json_selected, palmares=victoire_etendue, stats=victory_count)
 
 if __name__ == '__main__':    
