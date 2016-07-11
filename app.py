@@ -68,7 +68,11 @@ def get_year(year):
           if row['year'] == year:
             json_selected = row
             vainqueur = json_selected['Vainqueur']
-            break
+            
+        stats_selected = []
+        for row in json_data:
+          if row['Vainqueur'] == vainqueur:
+            stats_selected.append(row)
 
         csv_url = os.path.join(SITE_ROOT, "data", "palmares.csv")
         palma = pd.read_csv(csv_url, sep=",")
@@ -77,8 +81,30 @@ def get_year(year):
         victoire_etendue = palma.loc[(palma['Vainqueur'] == vainqueur) | (palma['Deuxième'] == vainqueur) | (palma['Troisième'] == vainqueur)]
         victoire_etendue = victoire_etendue.drop(['Nationalité first', 'Nationalité second', 'Nationalité third'], 1)
 
-        return render_template('years.html', years=json_selected, palmares=victoire_etendue)
+        average_speed_by_step = []
+        average_distance_by_step = []
+        for year in stats_selected:
+            average_speed_by_step.append(year['Vitesse moyenne'])
+            average_distance_by_step.append(year['Distance (en km)'])
 
-# if __name__ == '__main__':    
-#     #app.jinja_env.cache = {}
-#     app.run(host='0.0.0.0', debug=True, port=8080)
+        # print(victoire_etendue.groupby('Vainqueur').count())
+        first_count = len(victoire_etendue.loc[victoire_etendue['Vainqueur'] == vainqueur])
+        second_count = len(victoire_etendue.loc[victoire_etendue['Deuxième'] == vainqueur])
+        third_count = len(victoire_etendue.loc[victoire_etendue['Troisième'] == vainqueur])
+        total_count = len(victoire_etendue)
+
+        victory_count = [first_count, second_count, third_count, total_count]
+        
+        print(victory_count)
+        # print(average_speed_by_step)
+        # print(average_distance_by_step)
+
+        # for i, x in victoire_etendue.iterrows():
+        #     if x['Vainqueur'] == vainqueur:
+        #         print(i, x['Vainqueur'])
+
+        return render_template('years.html', years=json_selected, palmares=victoire_etendue, stats=victory_count)
+
+if __name__ == '__main__':    
+    #app.jinja_env.cache = {}
+    app.run(host='0.0.0.0', debug=True, port=8080)

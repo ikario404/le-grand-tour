@@ -80,7 +80,7 @@
         
         
 
-        <h3>Graphe</h3>
+        <h3>Statistique de victoires</h3>
         <canvas id="stats_chart" width="400" height="400"></canvas>
       </div>
     </div>
@@ -99,37 +99,63 @@
         var dataset = {{ years | safe }};
       {% endif %}
 
-      var data = {
-          datasets: [{
-              data: [
-                  {{ years['Distance (en km)'] }},
-                  {{ years['Vitesse moyenne'].replace(',','.') }},
-                  // {{ years['year'] }},
-                  {{ palmares | length }}
-              ],
-              backgroundColor: [
-                  "#FF6384",
-                  "#4BC0C0",
-                  "#FFCE56"
-              ],
-              label: 'My dataset' // for legend
-          }],
+      var data_victory = {
+          datasets: [
+            {
+                label: 'My dataset',
+                backgroundColor: "rgba(179,181,198,0.2)",
+                data: [
+                    {{ stats[3] }},
+                    {{ stats[0] }},
+                    {{ stats[1] }},
+                    {{ stats[2] }}
+                    
+                ]
+            }
+          ],
           labels: [
-              "Distance (en km)",
-              "Vitesse moyenne",
-              // "Année",
-              "nombre de victoires"
-          ]
-      };
+              "nombre de victoire totale",
+              "nombre de fois premier",
+              "nombre de fois second",
+              "nombre de fois troisième"
+              
+            ]
+        };
 
-      console.log(dataset);
       var ctx = document.getElementById("stats_chart").getContext("2d");
       ctx.canvas.height = 300;
       var statsChart = new Chart(ctx, {
-          labels : Object.keys(dataset),
-          data: data,
-          type: 'polarArea'/*,
-          options: options*/
+          labels : Object.keys(data_victory),
+          data: data_victory,
+          type: 'radar',
+          options: {
+              responsive: true,
+              legend: {
+                  display: false
+              },
+              tooltips: {
+                  mode: 'single',
+                  backgroundColor: 'grey',
+                  bodyColor: '#888',
+                  titleColor: '#888'
+              },
+              animation: {
+                  duration: 1500,
+                  easing: 'easeInOutQuart'
+              },
+              scale: {
+                  ticks: {
+                      beginAtZero: true,
+                      display: false
+                  }
+              },
+              maintainAspectRatio: true,
+              elements: {
+                  line: {
+                      tension: 0,
+                  }
+              }
+          }
       });
     </script>
 {% endblock %}
