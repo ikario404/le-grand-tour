@@ -82,7 +82,31 @@ tr:hover {
     background-color: rgb(186, 217, 228) !important;
 }
 
+// .last-block {
+//     margin-top: 275px;
+// }
 
-.last-block {
-    margin-top: 275px;
+.jumbotron {
+    z-index: 1000;
+    background-color: rgba(94, 153, 155,0.3);
+    position: relative;
+}
+
+.jumbotext {
+    text-shadow: .04em .04em 0 #f1f7f7;
+}
+
+
+.bike-container {
+    position: absolute;
+    width: 100%;
+    top: 75px;
+}
+
+.cycle-outer {
+    z-index: 1;
+}
+
+.doyouknow {
+    list-style: initial !important;
 }

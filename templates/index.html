@@ -10,116 +10,7 @@
 
   <br>
   
-  <div class="row">
-    <div class="col-xs-12 col-md-offset-3 col-md-6 ">
-      <h1 class="text-center">Testez vos connaissances du Tour</h1>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-xs-12 col-md-offset-4 col-md-4">
-      <form method="POST" action="/">
-        <div class="form-group">
-          {# <label for="sel1">Choissisez une année :</label> #}
-          <select class="form-control" id="sel1" name="year">
-            {% for year in years %}
-              <option>{{ year }}</option>
-            {% endfor %}
-          </select> 
-        </div>
-        <button type="submit" class="btn btn-default center-block">Choisir une année</button>
-      </form>
-    </div>
-  </div>
-
-  <hr>
-
-  <div class="row">
-    <div class="col-xs-12 col-md-offset-2 col-md-8 ">
-      <h2 class="text-center">Le saviez-vous ?</h2>
-        <ul>
-          <li><p>Le tour de France est <strong>née en 1903</strong></p></li>
-          <li><p>Le tour de France n'a pas été disputé durant la <strong>1ère guerre mondiale et seconde guerre mondiale</strong></p></li>
-          <li><p>8 vainqueurs se sont vus leur titre désatribué à posteri (principalement pour <strong>triche et dopage</strong>) </p></li>
-        </ul>
-      
-    </div>
-  </div>
-
-  <hr>
-
-  <div class="row">
-    <div class="col-xs-12 col-md-offset-2 col-md-8">      
-      <h3>Au total, ce sont 102 éditions qui se sont succédés dont 12 nationalités différentes ayant remportées au moins une fois la course</h3>
-      <p>
-        {% for n in data %}
-          <a href="/{{ n['year'] }}" title="{{ n['Vainqueur'] }}"> 
-            <span class="flag-icon flag-icon-{{ n['nat'] }}"></span> 
-          </a>
-        {% endfor %}
-      </p>
-    </div>
-  </div>
-
-      <hr>
-  <div class="row">
-    <div class="col-xs-12 col-md-offset-2 col-md-4"> 
-      <h4> Top 3 de pays vainqueurs :</h4>
-      <br>
-      <ul>
-        <li><p><strong>{{ nation['Nation'].iloc[0] | safe }}</strong> :
-          {{ nation['Victoires (vainqueurs)'].iloc[0] | safe }} fois</p></li>
-        <li><p><strong>{{ nation['Nation'].iloc[1] | safe }}</strong> :
-          {{ nation['Victoires (vainqueurs)'].iloc[1] | safe }} fois</p></li>
-        <li><p><strong>{{ nation['Nation'].iloc[2] | safe }}</strong> :
-          {{ nation['Victoires (vainqueurs)'].iloc[2] | safe }} fois</p></li>
-      </ul>    
-    </div>
-
-    <div class="col-xs-12 col-md-4"> 
-      <h4> Top 3 de équipes vainqueurs :</h4>
-      <br>
-      <ul>
-        <li><p><strong>{{ equipe['Equipe'].iloc[0] | safe }}</strong> :
-          {{ equipe['Victoires'].iloc[0] | safe }} fois</p></li>
-        <li><p><strong>{{ equipe['Equipe'].iloc[1] | safe }}</strong> :
-          {{ equipe['Victoires'].iloc[1] | safe }} fois</p></li>
-        <li><p><strong>{{ equipe['Equipe'].iloc[2] | safe }}</strong> :
-          {{ equipe['Victoires'].iloc[2] | safe }} fois</p></li>
-      </ul> 
-    </div>
-  </div>
-
-  <hr>
-
-  <div class="row">
-    <div class="col-xs-12 col-md-offset-2 col-md-8">      
-      <h3 >Quelques statistiques</h3>
-    
-      <h4>&Eacute;volution de la vitesse moyenne</h4>
-      <canvas id="speed_chart" width="400" height="400"></canvas>
-      
-      <hr>
-
-      <h4>&Eacute;volution distance parcourus</h4>
-      <canvas id="distance_chart" width="400" height="400"></canvas>
-      
-      <hr>
-
-      <h4>&Eacute;volution du nombres d'étapes</h4>
-      <canvas id="step_chart" width="400" height="400"></canvas>
-    </div>
-  </div>
-
-
-<!-- <h3>Pour aller plus loin</h3>
-http://www.ina.fr/video/MAN8995775140/le-tour-en-chiffres-e01-les-abandons-video.html
-
-Youtube docu sport plus dopé -->
-
-  <hr>
-
-  <div class="row">
+  <div class="row anime">
     <div class="bike-container">
       <div class="cycle-outer">
         <div class="cycle-wrapper">
@@ -186,13 +77,160 @@ Youtube docu sport plus dopé -->
   </div>
 
 
+  <div class="jumbotron">
+  {# <div class="row">
+    <div class="col-xs-12 col-md-offset-3 col-md-6 "> #}
+      <h1 class="text-center jumbotext">Testez vos connaissances du Tour</h1>
+      <form method="POST" action="/">
+        <div class="form-group">
+          {# <label for="sel1">Choissisez une année :</label> #}
+          <select class="form-control" id="sel1" name="year">
+            {% for year in years %}
+              <option>{{ year }}</option>
+            {% endfor %}
+          </select> 
+        </div>
+        <button type="submit" class="btn btn-default center-block">Choisir une année</button>
+      </form>
+   {#  </div>
+  </div> #}
+  </div>
+
+  {# <div class="row">
+    <div class="col-xs-12 col-md-offset-4 col-md-4">
+      
+    </div>
+  </div> #}
+
+  <hr>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-offset-2 col-md-8 ">
+      <h2 class="text-center">Le saviez-vous ?</h2>
+      <ul class="doyouknow">
+        <li><p>Le tour de France est <strong>né en 1903.</strong></p></li>
+        <li><p>Le tour de France n'a pas été disputé durant la <strong>1<sup>ère</sup> Guerre mondiale, ni durant la seconde Guerre mondiale</strong>.</p></li>
+        <li><p>Sept victoires de <strong>Lance Armrstrong (de 1999 à 2005)</strong> lui ont été désatribué à <em>posteri</em> (principalement pour dopage) .</p></li>
+        <li><p>Cependant, il est loin d'etre le premier. Le tour de France fut jalonnée de divers stratagèmes : rattrapage en <strong>voiture</strong>, <strong>empoisonnement</strong> et <strong>sabotage</strong>, <strong>clous</strong> repandus sur la route, <strong>moteurs</strong> miniature, ... </p></li>
+        <!-- http://www.linternaute.com/sport/cyclisme/dossier/les-derapages-du-tour-de-france/robic-leste-ses-bidons.shtml -->
+        <li><p>Malgré tout,  depuis 1903, ce sont environ <strong>14 500 coureurs</strong> qui ont pris le départ du Tour !</p></li>
+        <li><p>Mais dont près de <strong>33% ont abandonnés</strong> la course avant l'arrivée !</p></li>
+      </ul>
+      
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-offset-2 col-md-8">      
+      <h3>Au total, ce sont 102 éditions qui se sont succédées dont 12 nationalités différentes ayant remporté au moins une fois la course</h3>
+      <p>
+        {% for n in data %}
+          {%if 'Lance Armstrong' not in n['Vainqueur']  %}
+            <a href="/{{ n['year'] }}" title="{{ n['Vainqueur'] }}"> 
+              <span class="flag-icon flag-icon-{{ n['nat'] }}"></span> 
+            </a>
+          {% endif %}
+        {% endfor %}
+      </p>
+    </div>
+  </div>
+
+      <hr>
+  <div class="row">
+    <div class="col-xs-12 col-md-offset-2 col-md-4"> 
+      <h4> Top 3 de pays vainqueurs :</h4>
+      <br>
+      <ul>
+        <li>  
+          <p><span class="flag-icon flag-icon-fr"></span>
+            <strong>{{ nation['Nation'].iloc[0] | safe }}</strong> :
+            {{ nation['Victoires (vainqueurs)'].iloc[0] | safe }} fois
+          </p>
+        </li>
+        
+        <li>
+          <p><span class="flag-icon flag-icon-be"></span>
+              <strong>{{ nation['Nation'].iloc[1] | safe }}</strong> :
+                {{ nation['Victoires (vainqueurs)'].iloc[1] | safe }} fois
+          </p>
+        </li>
+        
+        <li>
+          <p><span class="flag-icon flag-icon-es"></span>
+            <strong>{{ nation['Nation'].iloc[2] | safe }}</strong> :
+              {{ nation['Victoires (vainqueurs)'].iloc[2] | safe }} fois
+          </p>
+        </li>
+      </ul>    
+    </div>
+
+    <div class="col-xs-12 col-md-4"> 
+      <h4> Top 3 des équipes gagnantes :</h4>
+      <br>
+      <ul>
+        <li><p><strong>{{ equipe['Equipe'].iloc[0] | safe }}</strong> :
+          {{ equipe['Victoires'].iloc[0] | safe }} fois</p></li>
+        <li><p><strong>{{ equipe['Equipe'].iloc[1] | safe }}</strong> :
+          {{ equipe['Victoires'].iloc[1] | safe }} fois</p></li>
+        <li><p><strong>{{ equipe['Equipe'].iloc[2] | safe }}</strong> :
+          {{ equipe['Victoires'].iloc[2] | safe }} fois</p></li>
+      </ul> 
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-offset-2 col-md-8">      
+      <h3 >Quelques statistiques</h3>
+    
+      <h4>&Eacute;volution de la vitesse moyenne</h4>
+      <canvas id="speed_chart" width="400" height="400"></canvas>
+      
+      <p>Suspendisse sagittis eget lacus nec bibendum. Suspendisse tempor purus quis ipsum molestie, sodales venenatis lacus sodales. In id est nunc. Sed volutpat ut ante id rutrum. Integer eu mauris mauris. Pellentesque ultricies sit amet tortor vel blandit. Sed dictum sit amet metus quis ultrices. </p>
+      
+      <hr>
+
+      <h4>&Eacute;volution distance parcourus</h4>
+      <canvas id="distance_chart" width="400" height="400"></canvas>
+      
+      <p>Phasellus dapibus urna nec metus tristique convallis. Donec eget massa et libero feugiat molestie. Aenean nunc nibh, tempor et diam pulvinar, finibus semper arcu. Phasellus scelerisque diam vitae metus aliquam viverra nec in arcu. Nullam sit amet ante sapien. Etiam ut accumsan orci, ut dignissim magna. Morbi pellentesque arcu et congue tempor. Integer pulvinar interdum erat ac pellentesque. </p>
+
+      <hr>
+
+      <h4>&Eacute;volution du nombres d'étapes</h4>
+      <canvas id="step_chart" width="400" height="400"></canvas>
+    
+      <p> Pellentesque viverra a mauris at ornare. Fusce ornare tempor turpis. Aliquam pretium tortor nec massa euismod tincidunt. Vivamus eros arcu, consectetur quis euismod sed, iaculis ut dui. Proin aliquam enim sit amet imperdiet iaculis. In vitae posuere nisi. Phasellus orci leo, hendrerit vitae rutrum quis, lacinia et neque. Cras scelerisque at metus mattis vulputate. </p>
+
+    </div>
+  </div>
+
+
+<!-- <h3>Pour aller plus loin</h3>
+http://www.ina.fr/video/MAN8995775140/le-tour-en-chiffres-e01-les-abandons-video.html
+
+Youtube docu sport plus dopé -->
+
+  <hr>
+
+  
+  <div class='row'>
+    <div class="col-xs-12 col-md-offset-2 col-md-8">
+      <!--<iframe autoplay=false play="false" flashvars="autoplay=false&play=false" menu="false" class="center-block" width='460' height='259' frameborder='0' marginheight ='0' marginwidth='0' scrolling ='no' autostart="false" src='https://player.ina.fr/player/embed/MAN8995775140/1/1b0bd203fbcd702f9bc9b10ac3d0fc21/460/259/1' ></iframe>-->
+    </div>
+  </div>
+
+
   <div class="row last-block">
 
     <hr>
 
     <div class="col-xs-12 col-md-offset-4 col-md-4 text-center">
       <h2>Votre pronostic 2016 ?</h2>
-      <p> Faite nous connaitre vos prévisions 2016 !</p>
+      <p> Faîtes nous connaître vos prévisions pour 2016 !</p>
       <input type="text" class="form-control">
       <br>
       <button type="submit" class="btn btn-default center-block ">Envoyer</button>
