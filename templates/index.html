@@ -80,7 +80,7 @@
   <div class="jumbotron">
   {# <div class="row">
     <div class="col-xs-12 col-md-offset-3 col-md-6 "> #}
-      <h1 class="text-center jumbotext">Testez vos connaissances du Tour</h1>
+      <h1 class="text-center jumbotext">Testez vos connaissances du Tour de France</h1>
       <form method="POST" action="/">
         <div class="form-group">
           {# <label for="sel1">Choissisez une année :</label> #}
@@ -102,29 +102,30 @@
     </div>
   </div> #}
 
-  <hr>
+  
 
   <div class="row">
     <div class="col-xs-12 col-md-offset-2 col-md-8 ">
       <h2 class="text-center">Le saviez-vous ?</h2>
+      <hr>
       <ul class="doyouknow">
-        <li><p>Le tour de France est <strong>né en 1903.</strong></p></li>
-        <li><p>Le tour de France n'a pas été disputé durant la <strong>1<sup>ère</sup> Guerre mondiale, ni durant la seconde Guerre mondiale</strong>.</p></li>
-        <li><p>Sept victoires de <strong>Lance Armrstrong (de 1999 à 2005)</strong> lui ont été désatribué à <em>posteri</em> (principalement pour dopage) .</p></li>
-        <li><p>Cependant, il est loin d'etre le premier. Le tour de France fut jalonnée de divers stratagèmes : rattrapage en <strong>voiture</strong>, <strong>empoisonnement</strong> et <strong>sabotage</strong>, <strong>clous</strong> repandus sur la route, <strong>moteurs</strong> miniature, ... </p></li>
+        <li><p><strong>Né en 1903</strong> le tour de France n'a pas été disputé durant la <strong>1<sup>ère</sup> Guerre mondiale, ni durant la seconde Guerre mondiale</strong>.</p></li>
+        <li><p>Sept victoires de <strong>Lance Armrstrong (de 1999 à 2005)</strong> lui ont été désattribuées à <em>posteri</em> (principalement pour dopage) .</p></li>
+        <li><p>Cependant, il est loin d'avoir été le premier. Le tour de France fut jalonné de divers stratagèmes : raccourci en <strong>voiture</strong>, <strong>empoisonnement</strong>, <strong>agression</strong> et <strong>sabotage</strong>, <strong>clous</strong> repandus sur la route, <strong>moteurs</strong> miniature empoisonne le tour depuis ses débuts. </p></li>
         <!-- http://www.linternaute.com/sport/cyclisme/dossier/les-derapages-du-tour-de-france/robic-leste-ses-bidons.shtml -->
-        <li><p>Malgré tout,  depuis 1903, ce sont environ <strong>14 500 coureurs</strong> qui ont pris le départ du Tour !</p></li>
-        <li><p>Mais dont près de <strong>33% ont abandonnés</strong> la course avant l'arrivée !</p></li>
-      </ul>
-      
+        <li><p>Malgré tout, et toujours depuis 1903, ce sont environ <strong>14 500 coureurs</strong> qui ont continuer de prendre le départ du Tour !</p></li>
+        <li><p>Mais dont près de <strong>33% ont abandonnés</strong> la course avant l'arrivée...</p></li>
+      </ul> 
     </div>
   </div>
 
   <hr>
 
+
   <div class="row">
     <div class="col-xs-12 col-md-offset-2 col-md-8">      
-      <h3>Au total, ce sont 102 éditions qui se sont succédées dont 12 nationalités différentes ayant remporté au moins une fois la course</h3>
+      <h4>Au total, ce sont 102 éditions qui se sont succédées dont 12 nationalités différentes ayant remporté au moins une fois la course :</h4>
+      <hr>
       <p>
         {% for n in data %}
           {%if 'Lance Armstrong' not in n['Vainqueur']  %}
@@ -137,7 +138,8 @@
     </div>
   </div>
 
-      <hr>
+  <hr>
+  
   <div class="row">
     <div class="col-xs-12 col-md-offset-2 col-md-4"> 
       <h4> Top 3 de pays vainqueurs :</h4>
@@ -189,22 +191,21 @@
       <h4>&Eacute;volution de la vitesse moyenne</h4>
       <canvas id="speed_chart" width="400" height="400"></canvas>
       
-      <p>Suspendisse sagittis eget lacus nec bibendum. Suspendisse tempor purus quis ipsum molestie, sodales venenatis lacus sodales. In id est nunc. Sed volutpat ut ante id rutrum. Integer eu mauris mauris. Pellentesque ultricies sit amet tortor vel blandit. Sed dictum sit amet metus quis ultrices. </p>
-      
+      <p>Sur les 102 éditions du Tour, la vitesse moyenne du gagnant a augmentée de manière quasiment continue toutes les 2 sessions. </p>
+    
       <hr>
 
       <h4>&Eacute;volution distance parcourus</h4>
       <canvas id="distance_chart" width="400" height="400"></canvas>
       
-      <p>Phasellus dapibus urna nec metus tristique convallis. Donec eget massa et libero feugiat molestie. Aenean nunc nibh, tempor et diam pulvinar, finibus semper arcu. Phasellus scelerisque diam vitae metus aliquam viverra nec in arcu. Nullam sit amet ante sapien. Etiam ut accumsan orci, ut dignissim magna. Morbi pellentesque arcu et congue tempor. Integer pulvinar interdum erat ac pellentesque. </p>
+      <p>Dans le même temps la distance maximale parcourue tend à diminuer depuis son maximum, atteint en 1926. Plus largement cette période 1911-1929, correspond par ailleurs aux vitesses moyenne atteinte par le gagnant, les plus basses. </p>
 
       <hr>
 
-      <h4>&Eacute;volution du nombres d'étapes</h4>
+      <h4>&Eacute;volution du nombres d'étapes/distance parcourus</h4>
       <canvas id="step_chart" width="400" height="400"></canvas>
     
-      <p> Pellentesque viverra a mauris at ornare. Fusce ornare tempor turpis. Aliquam pretium tortor nec massa euismod tincidunt. Vivamus eros arcu, consectetur quis euismod sed, iaculis ut dui. Proin aliquam enim sit amet imperdiet iaculis. In vitae posuere nisi. Phasellus orci leo, hendrerit vitae rutrum quis, lacinia et neque. Cras scelerisque at metus mattis vulputate. </p>
-
+      <p>Le nombre d'étapes à rapidement augmenté, passant de 5 à 10 étapes à une moyenne de 25. Ainsi la distance parcourue par étapes s'est réduit, expliquant en partie probablement une vitesse accéléré.</p>
     </div>
   </div>
 
@@ -255,6 +256,7 @@ Youtube docu sport plus dopé -->
         var data_speed = [];
         var data_distance = [];
         var data_steps = [];
+        var data_distByStep = [];
         for (i = 0; i <dataset.length; i++) {
           var average_speed = dataset[i]["Vitesse moyenne"];    
           if (Number.isInteger(average_speed)) {
@@ -270,6 +272,9 @@ Youtube docu sport plus dopé -->
 
           var steps = dataset[i]["Étapes"];
           data_steps.push(steps);
+
+          var distByStep = (dataset[i]["Distance (en km)"]/dataset[i]["Étapes"])/5;
+          data_distByStep.push(distByStep);
         }
       {% endif %}
 
@@ -286,6 +291,15 @@ Youtube docu sport plus dopé -->
               }]
           },
           options: {
+              tooltips: {
+                enabled: true,
+                mode: 'single',
+                callbacks: {
+                    label: function(tooltipItems, data) { 
+                        return tooltipItems.yLabel + ' Km/h (moyenne)' ;
+                    }
+                }
+              },
               scales: {
                   yAxes: [{
                       ticks: {
@@ -308,10 +322,19 @@ Youtube docu sport plus dopé -->
               datasets: [{
                   label: '# Distance parcourus (en km)',
                   data: data_distance,
-                  backgroundColor: "rgba(94, 153, 155,0.6)"
+                  backgroundColor: "rgb(94, 153, 155)"
               }]
           },
           options: {
+              tooltips: {
+                enabled: true,
+                mode: 'single',
+                callbacks: {
+                    label: function(tooltipItems, data) { 
+                        return tooltipItems.yLabel + ' Km parcourue' ;
+                    }
+                }
+              },
               scales: {
                   yAxes: [{
                       ticks: {
@@ -334,10 +357,23 @@ Youtube docu sport plus dopé -->
               datasets: [{
                   label: '# Nombre d\'étapes',
                   data: data_steps,
-                  backgroundColor: "rgba(94, 153, 155,0.6)"
+                  backgroundColor: "#60a0df"
+              }, {
+                  label: '# Distance parcourue/Nombre d\'étapes/',
+                  data: data_distByStep,
+                  backgroundColor: "rgb(94, 153, 155)"
               }]
           },
           options: {
+              tooltips: {
+                enabled: true,
+                mode: 'single',
+                callbacks: {
+                    label: function(tooltipItems, data) { 
+                        return parseInt(tooltipItems.yLabel) * 5  + '';
+                    }
+                }
+              },
               scales: {
                   yAxes: [{
                       ticks: {
@@ -346,7 +382,7 @@ Youtube docu sport plus dopé -->
                   }]
               },
               legend: {
-                  display: false   
+                  display: true
               }
           }
       });

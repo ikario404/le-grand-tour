@@ -88,7 +88,7 @@ tr:hover {
 
 .jumbotron {
     z-index: 1000;
-    background-color: rgba(94, 153, 155,0.3);
+    background-color: rgba(94, 153, 155,0.5);
     position: relative;
 }
 
@@ -108,5 +108,5 @@ tr:hover {
 }
 
 .doyouknow {
-    list-style: initial !important;
+    //list-style: initial !important;
 }

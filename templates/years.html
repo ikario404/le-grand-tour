@@ -23,7 +23,7 @@
           <h3>Vainqueur</h3>
           {% if 'Lance Armstrong' in years['Vainqueur'] %}
             <h4><a href="https://fr.wikipedia.org/wiki/{{ years['Vainqueur'].replace(' ','_') }}">{{ years['Vainqueur'] }}</h4></a>
-            <i>Désattribué en 2012</i>
+            <i>désattribué en 2012</i>
             <sub><a href="http://www.lequipe.fr/Cyclisme-sur-route/Actualites/Sept-epreuves-sans-vainqueur/322403">[voir]</a></sub>
           {% else %}
             <h4><a href="https://fr.wikipedia.org/wiki/{{ years['Vainqueur'].replace(' ','_') }}">{{ years['Vainqueur'] }} <span class="flag-icon flag-icon-{{years['nat']}}"></span> </a></h4>
